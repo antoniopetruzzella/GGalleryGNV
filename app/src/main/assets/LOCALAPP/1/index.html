@@ -3,53 +3,7 @@
 <html xmlns:display="http://www.w3.org/1999/xhtml">
 <style type="text/css">
 
-    #banner{
 
-        position:absolute;
-        left:20%;
-        right:20%;
-        top:5px;
-        border: 2px solid red;
-        border-radius: 5px;
-        color: red;
-        font-size:100%;
-        text-align:center;
-    }
-
-    #info{
-
-        position:absolute;
-        left:20%;
-        right:20%;
-        bottom:20%;
-        visibility:hidden;
-        background-color:#42f4f1;
-        border: 2px solid red;
-        border-radius: 5px;
-        color: black;
-    }
-    #successo{
-
-        position:absolute;
-        left:20%;
-        right:20%;
-        bottom:20%;
-        visibility:hidden;
-        background-color:#42f4f1;
-        border: 2px solid red;
-        border-radius: 5px;
-        color: black;
-        font-size:200%;
-    }
-
-
-
-    #footer{
-
-        position:absolute;
-        left:50%;
-        bottom:5px;
-    }
 
 </style>
 
@@ -89,8 +43,9 @@
     <div id="mapdiv"><img src="assets/map.png"></div>
     <div id="console">
 
+        <div id="leftButton"><img class="arrowButton" src="assets/left.png" alt=""></div>
         <div class="radarContainer_left" id="radarContainer"></div>
-
+        <div id="rightButton"><img class="arrowButton" src="assets/right.png" alt=""></div>
 
         <div id="mapbuttondiv"><img id="mapbutton" src="assets/maps-icon60.png"></div>
     </div>
@@ -100,9 +55,18 @@
 
     $("#mapbutton").click(function () {
     $('#mapdiv').toggle();
+    });
 
-});
-        
+    $("#rightButton").click(function(){
+
+        changeVFpos("right");
+    });
+
+      $("#leftButton").click(function(){
+
+        changeVFpos("left");
+    });
+
 
 </script>
 
