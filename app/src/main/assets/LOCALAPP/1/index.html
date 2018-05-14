@@ -33,22 +33,32 @@
     <script type="text/javascript" src="../jquery/jquery-1.9.1.min.js"></script>
     <!--<script type="text/javascript" src="jquery/jquery.mobile-1.3.2.min.js"></script>-->
 
+
+
     <script src="js/35.js"></script>
 </head>
 <body onload="start()">
 <div id="main">
-    <div id="communications">PONTE2: SALONE CENTRALE DELLE FESTE</div>
+    <div id="main_bar"><img id="dove" class="bar_image" src="../assets/dove.png" alt="dove"/><img id="info" class="bar_image" src="../assets/info.png" alt="dove"/><img id="garage" class="bar_image" src="../assets/garage.png" alt="dove"/><img id="cabina" class="bar_image" src="../assets/cabina.png" alt="dove"/><img id="bar" class="bar_image" src="../assets/bar.png" alt="dove"/><img id="sicurezza" class="bar_image" src="../assets/sicurezza.png" alt="dove"/></div>
+
 
     <div data-role="page" id="page1" style="background: none;" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
-    <div id="mapdiv"><img src="assets/map.png"></div>
-    <div id="console">
+    <div id="introdiv">
 
-        <div id="leftButton"><img class="arrowButton" src="assets/left.png" alt=""></div>
-        <div class="radarContainer_left" id="radarContainer"></div>
-        <div id="rightButton"><img class="arrowButton" src="assets/right.png" alt=""></div>
 
-        <div id="mapbuttondiv"><img id="mapbutton" src="assets/maps-icon60.png"></div>
+
+
     </div>
+
+
+  <div id="console">
+      <div id="leftButton"><img src="../assets/nuovo_sx.png"></div>
+      <div class="radarContainer_left" id="radarContainer"><span id="centra_finder">Tramite questi due pulsanti sposta l'immagine che troverai orientando il device verso la freccia blu, e sovrapponila a quella reale. Quindi clicca sulla stessa e avvierai la Realtà Aumentata. Potrai scegliere tramite i pulsanti in alto la location sulla quale avere più informazioni</span></div>
+      <div id="rightButton"><img src="../assets/nuovo_dx.png"></div>
+      <div id="mapdiv"><img src="../assets/map.png"></div>
+      <div id="location"><img class="location_image" src="../assets/location_bar.png" alt=""></div>
+
+ </div>
 
 </div>
 <script type="application/javascript">
