@@ -36,7 +36,7 @@ radardrawables.push(radarCircle);
         enabled:true
     });
 
-    var cabina_dove=new AR.Label("la tua cabina è al ponte 5, esattamente sopra questo",dimensione_scritta,{
+    var cabina_dove=new AR.Label("la tua cabina è al ponte 5, adesso sei al 4",dimensione_scritta,{
 
         style:{textColor:"#ff0000",fontStyle:AR.CONST.FONT_STYLE.BOLD},
         opacity:0,
@@ -82,7 +82,9 @@ radardrawables.push(radarCircle);
 
     var animazione=new AR.AnimationGroup(AR.CONST.ANIMATION_GROUP_TYPE.SEQUENTIAL,[an_cabina_dove,an_cabina_come,an_cabina_come_2],{
 
-        onFinish:function(){ascensore.enabled=true;}
+        onFinish:function(){
+            ascensore.enabled=true;
+         }
     });
 
     var cabina = new AR.ImageDrawable(new AR.ImageResource("assets/cabina.png"),dimensione,{
@@ -102,29 +104,27 @@ radardrawables.push(radarCircle);
        },
        state:0,
        enabled:false,
-       onClick:function(){
-           sala_bambini.enabled=false;
-              if(this.state==0){
-                   video.play();
-                   this.state=1
-              }else{
-                video.stop();
-                   this.state=0;
-              }
-           }
+
        });
     var bar = new AR.ImageDrawable(new AR.ImageResource("assets/bar.png"),dimensione,{
 
-        enabled:true,
-        onClick:function(){
-           video.enabled=true;
-           video.play();
-        }
+        enabled:true
+
     });
     var garage = new AR.ImageDrawable(new AR.ImageResource("assets/garage.png"),dimensione,{
 
         enabled:true
     });
+
+    var bar_apertura=new AR.Label(this.apertura(),dimensione_scritta,{
+
+       style:{textColor:"#ff0000",fontStyle:AR.CONST.FONT_STYLE.BOLD},
+       translate:{y:-1}
+    });
+
+    //////////////////////////////
+    /// INIZIO DEI GEOOBJECT /////
+    //////////////////////////////
 
     var viewfinder_geo=new AR.GeoObject(new AR.RelativeLocation(null,10,0,0),{
 
@@ -133,14 +133,19 @@ radardrawables.push(radarCircle);
             indicator:directionIndicatorDrawable,
             radar:radardrawables
         },
-       enabled:true,
-       onClick:function(){
+        onClick:function(){
 
-            camera_geo.enabled=true;
-            sala_bambini_geo.enabled=true;
-            shopping_geo.enabled=true;
-            this.enabled=false;
-       }
+
+                    jQuery("#main_bar").css("opacity","1");
+                    jQuery("#main_bar").css("pointer-events","all");
+                    jQuery("#centra_finder").css("visibility","hidden");
+                    jQuery("#rightButton").css("visibility","hidden");
+                    jQuery("#leftButton").css("visibility","hidden");
+                    this.enabled=false;
+
+                },
+       enabled:true
+
     });
     geoObjs.push(viewfinder_geo);
 
@@ -160,7 +165,7 @@ radardrawables.push(radarCircle);
 
     var bar_geo =new AR.GeoObject(new AR.RelativeLocation(null,-5,0,0),{
         drawables:{
-            cam:[bar,video],
+            cam:[bar,bar_apertura],
             indicator: directionIndicatorDrawable,
             radar: radardrawables
         },
@@ -176,13 +181,18 @@ radardrawables.push(radarCircle);
         },
         enabled:false
     });
-//    geoObjs.push(garage_geo);
+    geoObjs.push(garage_geo);
 
     var info_geo =new AR.GeoObject(new AR.RelativeLocation(null,0,10,0),{
             drawables:{
-                cam:[info],
+                cam:[info,video],
                 indicator: directionIndicatorDrawable,
                 radar: radardrawables
+            },
+            onEnterFieldOfVision:function(){
+
+                video.enabled=true;
+                video.play();
             },
             enabled:false
         });
@@ -208,6 +218,7 @@ radardrawables.push(radarCircle);
 
             case "info":
                 if(info_geo.enabled==false) {
+
                     info_geo.enabled = true;
                 }else{
                     info_geo.enabled = false;
@@ -229,6 +240,7 @@ radardrawables.push(radarCircle);
                    cabina_geo.enabled = true;
                }else{
                    cabina_geo.enabled = false;
+                   ascensore.enabled=false;
                }
 
                break;
@@ -241,22 +253,14 @@ radardrawables.push(radarCircle);
                }
 
                break;
-
-
-
         }
 
-
-
     });
-
+PoiRadar.show();
 return null;
 };	//QUI FINISCE START
 
 function intro() {
-
-
-
 
 };
 
@@ -283,6 +287,19 @@ function changeVFpos(direction){
     console.log(ang.toString()+"°  E: "+geoObjs[0].locations[0].easting+"  N: "+geoObjs[0].locations[0].northing)
 
 };
+
+function apertura(){
+
+scritta="spiacenti, in questo momento il bar è chiuso, riaprirà domani alle 8.00!"
+
+var d=new Date();
+if (d.getHours()>8 && d.getHours()<23){
+
+scritta="in questo momento il bar è aperto!"
+    }
+
+return scritta;
+}
 
 
 
