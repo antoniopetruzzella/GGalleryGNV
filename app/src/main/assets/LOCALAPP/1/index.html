@@ -44,25 +44,25 @@
 
     <div data-role="page" id="page1" style="background: none;" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
 
-
+  <div id="mapdiv"><img src="assets/map.png"></div>
+  <div id="emergenzadiv"><img src="../assets/emergenza_label.png" alt=""></div>
 
   <div id="console">
+
       <div id="leftButton"><img src="../assets/nuovo_sx.png"></div>
       <div id="centra_finder"><h2>Tramite questi due pulsanti sposta l'immagine che troverai orientando il device verso la freccia blu, e sovrapponila a quella reale.
           Quindi clicca sulla stessa e avvierai la Realtà Aumentata. Potrai scegliere tramite i pulsanti in alto la location sulla quale avere più informazioni</h2></div>
       <div id="radarContainer"></div>
       <div id="rightButton"><img src="../assets/nuovo_dx.png"></div>
-      <div id="mapdiv"><img src="../assets/map.png"></div>
-      <div id="location"><img class="location_image" src="../assets/location_risto.png" alt=""></div>
+
+      <div id="location"><img class="location_image" src="assets/location.png" alt=""></div>
 
  </div>
 
 </div>
 <script type="application/javascript">
 
-    $("#mapbutton").click(function () {
-    $('#mapdiv').toggle();
-    });
+
 
     $("#rightButton").click(function(){
 

@@ -56,36 +56,9 @@ radardrawables.push(radarCircle);
         translate:{y:-2}
     });
 
-    var direzione_ascensore=new AR.Label("direzione ascensore",dimensione_scritta,{
-
-        style:{textColor:"#ff0000",fontStyle:AR.CONST.FONT_STYLE.BOLD},
-        opacity:1,
-        enabled:false
-
-    });
-
-    var ascensore =new AR.GeoObject(new AR.RelativeLocation(null,-10,10,0),{
-        drawables:{
-            cam:[direzione_ascensore],
-            indicator: directionIndicatorDrawable,
-            radar: radardrawables,
-        },
-        enabled:false,
-        onEnterFieldOfVision:function(){
-            direzione_ascensore.enabled=true;
-        }
-    });
-
     var an_cabina_dove=new AR.PropertyAnimation(cabina_dove,"opacity",0,1,2000);
     var an_cabina_come=new AR.PropertyAnimation(cabina_come,"opacity",0,1,2000);
     var an_cabina_come_2=new AR.PropertyAnimation(cabina_come_2,"opacity",0,1,2000);
-
-    var animazione=new AR.AnimationGroup(AR.CONST.ANIMATION_GROUP_TYPE.SEQUENTIAL,[an_cabina_dove,an_cabina_come,an_cabina_come_2],{
-
-        onFinish:function(){
-            ascensore.enabled=true;
-         }
-    });
 
     var cabina = new AR.ImageDrawable(new AR.ImageResource("assets/cabina.png"),dimensione,{
 
@@ -112,6 +85,11 @@ radardrawables.push(radarCircle);
 
     });
     var garage = new AR.ImageDrawable(new AR.ImageResource("assets/garage.png"),dimensione,{
+
+        enabled:true
+    });
+
+    var ascensore=new AR.ImageDrawable(new AR.ImageResource("assets/elevator.png"),dimensione,{
 
         enabled:true
     });
@@ -194,10 +172,35 @@ radardrawables.push(radarCircle);
                 video.enabled=true;
                 video.play();
             },
+
             enabled:false
         });
 
+  var ascensore_geo =new AR.GeoObject(new AR.RelativeLocation(null,-2,2,0),{
+        drawables:{
+            cam:[ascensore],
+            indicator: directionIndicatorDrawable,
+            radar: radardrawables
+        },
+        enabled:false,
+        onEnterFieldOfVision:function(){
+            direzione_ascensore.enabled=true;
+        }
+    });
 
+
+    //// FINE GEOOBLECT////
+
+     //// ANIMAZIONE /////
+
+        var animazione=new AR.AnimationGroup(AR.CONST.ANIMATION_GROUP_TYPE.SEQUENTIAL,[an_cabina_dove,an_cabina_come,an_cabina_come_2],{
+
+            onFinish:function(){
+                ascensore_geo.enabled=true;
+             }
+        });
+
+        //////////////////
 
     jQuery("img").click(function (event) {
 
@@ -214,6 +217,7 @@ radardrawables.push(radarCircle);
             case "dove":
 
                 jQuery("#location").toggle();
+                jQuery("#mapdiv").toggle();
                 break;
 
             case "info":
@@ -222,6 +226,7 @@ radardrawables.push(radarCircle);
                     info_geo.enabled = true;
                 }else{
                     info_geo.enabled = false;
+
                 }
 
                 break;
@@ -240,7 +245,7 @@ radardrawables.push(radarCircle);
                    cabina_geo.enabled = true;
                }else{
                    cabina_geo.enabled = false;
-                   ascensore.enabled=false;
+                   ascensore_geo.enabled=false;
                }
 
                break;
@@ -252,6 +257,10 @@ radardrawables.push(radarCircle);
                    garage_geo.enabled = false;
                }
 
+               break;
+           case "sicurezza":
+
+               jQuery("#emergenzadiv").toggle();
                break;
         }
 

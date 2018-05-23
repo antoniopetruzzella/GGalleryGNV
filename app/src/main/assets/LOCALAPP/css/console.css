@@ -54,6 +54,16 @@ top: 20%;
 left:40%;
 display:none;
 }
+
+#emergenzadiv{
+    position:absolute;
+    top: 40%;
+    left: 20%;
+    display:none;
+
+}
+
+
 #introdiv{
     position:absolute;
     top: 20%;
@@ -85,7 +95,7 @@ display:none;
     position:absolute;
     bottom:0;
     width: 100%;
-    left:35%;
+    left:65%;
     display: none;
 
 }
@@ -112,5 +122,6 @@ position:absolute;
 left: 75%;
 top:8%;
 }
+
 			
 
